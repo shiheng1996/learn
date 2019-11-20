@@ -26,19 +26,101 @@
 
 ##### 饿汉式
 
-![img](file:///C:\Users\sKF8412\AppData\Local\Temp\msohtmlclip1\01\clip_image002.jpg)
+```java
+/**
+ * 饿汉式单例模式
+ * 每个对象在没有使用之前就已经初始化了。这就可能带来潜在的性能问题
+ * 如果这个对象很大呢？没有使用这个对象之前，就把它加载到了内存中去是一种巨大的浪费。
+ *
+ */
+public class EagerSingleton {
+    private  static  EagerSingleton es =new EagerSingleton();
+    private EagerSingleton() {
+    }
+    public  static  EagerSingleton getSingleton(){
+        return es;
+    }
+}
+```
+
+
 
 ##### 懒汉式
 
-![img](file:///C:\Users\sKF8412\AppData\Local\Temp\msohtmlclip1\01\clip_image004.jpg)
+
+
+```java
+/**
+ * 懒汉式
+ * 它使用了延迟加载来保证对象在没有使用之前，是不会进行初始化的。
+ * 但是，这种写法线程不安全
+ * 这是因为在多个线程可能同时运行到第18行，判断ls为null，于是同时进行了初始化。
+ * 所以，这是面临的问题是如何使得这个代码线程安全？很简单，在那个方法前面加一个Synchronized就OK了。
+ */
+public class LazySingleton {
+    private static LazySingleton ls = null;
+    private LazySingleton() {
+    }
+    public static LazySingleton getSingleton() {
+        if (ls == null) {
+            ls = new LazySingleton();
+        }
+        return ls;
+    }
+}
+```
+
+
 
 ##### 双重检查锁 的懒汉式
 
-![img](file:///C:\Users\sKF8412\AppData\Local\Temp\msohtmlclip1\01\clip_image006.jpg)
+```java
+/**
+ * 双重检查锁 单例模式(线程安全)
+ * 性能问题:同步的代价必然会一定程度的使程序的并发度降低。线程不安全的原因其实是在初始化对象的时候，
+ * 可以想办法把同步的粒度降低，只在初始化对象的时候进行同步。这里有必要提出一种新的设计思想——双重检查锁（Double-Checked Lock）。
+ */
+public final class DoubleCheckedSingleton {
+    private static DoubleCheckedSingleton singObj = null;
+    private DoubleCheckedSingleton(){
+    }
+    public static DoubleCheckedSingleton getSingleInstance(){
+        if(null == singObj ) {
+            synchronized (DoubleCheckedSingleton.class){
+                if(null == singObj)
+                    singObj = new DoubleCheckedSingleton();
+            }
+        }
+        return singObj;
+    }
+}
+```
+
+
 
 ##### Initialization on Demand Holder
 
-![img](file:///C:\Users\sKF8412\AppData\Local\Temp\msohtmlclip1\01\clip_image008.jpg)
+```java
+/**
+ * Initialization on Demand Holder  (线程安全,占用资源低)
+ * 这种方法使用内部类来做到延迟加载对象，在初始化这个内部类的时候，
+ * JLS(Java Language Sepcification)会保证这个类的线程安全。
+ * 这种写法最大的美在于，完全使用了Java虚拟机的机制进行同步保证，没有一个同步的关键字。
+ */
+public class Singleton {
+    private static class SingletonHolder {
+        final static Singleton instance = new Singleton();
+    }
+    private Singleton() {
+    }
+    public static Singleton getInstance() {
+        return SingletonHolder.instance;
+    }
+}
+
+```
+
+
 
 ### 并发编程
 
