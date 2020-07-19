@@ -1,6 +1,6 @@
 # spring bean
 ## spring bane的生命周期
-![](C:\Users\stone\Desktop\spring-bean.jpg)
+![](https://www.javazhiyin.com/wp-content/uploads/2019/05/java10-1558500659.jpg)
 BeanNameAware.setBeanName() 在创建此bean的bean工厂中设置bean的名称，在普通属性设置之后调用，在InitializinngBean.afterPropertiesSet()方法之前调用
 
 BeanClassLoaderAware.setBeanClassLoader(): 在普通属性设置之后，InitializingBean.afterPropertiesSet()之前调用
