@@ -27,10 +27,10 @@ BeanPostProcessor.postProcessAfterInitialization() : 将此BeanPostProcessor 应
 
 InitializingBean.afterPropertiesSet(): 被BeanFactory在设置所有bean属性之后调用(并且满足BeanFactory 和 ApplicationContextAware)。
 
-##spring bean 注入循环依赖问题(spring 三级缓存解决set注入和属性注入,构造器注入不能解决)
+## spring bean 注入循环依赖问题(spring 三级缓存解决set注入和属性注入,构造器注入不能解决)
 
 Spring解决循环依赖的诀窍就在于singletonFactories这个cache，这个cache中存的是类型为ObjectFactory
-`/** Cache of singleton objects: bean name --> bean instance */
+` /** Cache of singleton objects: bean name --> bean instance */
 private final Map<String, Object> singletonObjects = new ConcurrentHashMap<String, Object>(256);  一级缓存
 /** Cache of early singleton objects: bean name --> bean instance */
 private final Map<String, Object> earlySingletonObjects = new HashMap<String, Object>(16); 二级缓存
@@ -52,7 +52,7 @@ protected Object getSingleton(String beanName, boolean allowEarlyReference) {
          }
       }
    }
-   return (singletonObject != NULL_OBJECT ? singletonObject : null);}`
+   return (singletonObject != NULL_OBJECT ? singletonObject : null);} `
 Spring首先从singletonObjects（一级缓存）中尝试获取，如果获取不到并且对象在创建中，则尝试从earlySingletonObjects(二级缓存)中获取，如果还是获取不到并且允许从singletonFactories通过getObject获取，则通过singletonFactory.getObject()(三级缓存)获取。如果获取到了则移除对应的singletonFactory,将singletonObject放入到earlySingletonObjects，其实就是将三级缓存提升到二级缓存中！
 
 #spring ioc
