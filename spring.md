@@ -26,7 +26,9 @@ BeanPostProcessor.postProcessBeforeInitialization() : 将此BeanPostProcessor �
 BeanPostProcessor.postProcessAfterInitialization() : 将此BeanPostProcessor 应用于给定的新bean实例 在任何bean初始化回调方法(像是InitializingBean.afterPropertiesSet或者自定义的初始化方法)之后调用。这个bean将要准备填充属性的值。返回的bean示例可能被普通对象包装
 
 InitializingBean.afterPropertiesSet(): 被BeanFactory在设置所有bean属性之后调用(并且满足BeanFactory 和 ApplicationContextAware)。
+
 ##spring bean 注入循环依赖问题(spring 三级缓存解决set注入和属性注入,构造器注入不能解决)
+
 Spring解决循环依赖的诀窍就在于singletonFactories这个cache，这个cache中存的是类型为ObjectFactory
 `/** Cache of singleton objects: bean name --> bean instance */
 private final Map<String, Object> singletonObjects = new ConcurrentHashMap<String, Object>(256);  一级缓存
