@@ -1,0 +1,17 @@
+      /publicwork/pod_gpu_exporter.sh &
+      python /public/script/fashion-mnist/train_kerastest_liu.py --learning_rate=0.05 --epochs=100  --data_dir=/public/dataset/fashion-mnist --model_dir=/private/001/project_1/flow_3/node_2/run_2/model 1>/log/yin/project_1/flow_3/pod_log/pod-8a71811a712f7fcd01713461abf70078-default-0/stdoutfile.log  2>>/log/yin/project_1/flow_3/pod_log/pod-8a71811a712f7fcd01713461abf70078-default-0/stdoutfile.log &
+      BUSSINESS_PID=$!
+      wait  $BUSSINESS_PID
+      exit $?
+      
+      $!作用:
+      Shell最后运行的后台Process的PID(后台运行的最后一个进程的进程ID号)
+      
+      wait作用:
+      父进程一旦调用了wait就立即阻塞自己，由wait自动分析是否当前进程的某个子进程已经退出，
+      如果让它找到了这样一个已经变成僵尸的子进程，wait就会收集这个子进程的信息，并把它彻底销毁后返回；
+      如果没有找到这样一个子进程，wait就会一直阻塞在这里，直到有一个出现为止
+      
+      $?作用:
+      1. 获取函数结果
+      2. 获取上命令退出状态
