@@ -74,5 +74,8 @@ Program Counter Register
 * final类型的常量、属性和方法信息
 ### 方法取内存溢出
 ### 运行时常量池
+# jvm 运行参数配置
+Xss 栈内存
+Xms 
 
 
