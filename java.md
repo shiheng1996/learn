@@ -183,6 +183,8 @@ sleep()或者wait(),join()带时间参数等方法时
 ![img](file:///C:\Users\sKF8412\AppData\Local\Temp\msohtmlclip1\01\clip_image012.png)
 
 #### 3. 线程方法
+|  方法  | 描述 |
+|  ----  | ----  |
 |  sleep()   |  线程睡眠,释放cpu执行权,不释放锁 |
 |  wait()    |   线程等待,释放cpu 执行权,释放锁,只能等待 notify()唤醒|
 |  notify()  | 唤醒被wait 的线程 |
