@@ -1,3 +1,11 @@
+### redis 持久化
+#### aof
+* 原理: 将Reids的操作日志以追加的方式写入文件
+* 配置: appendfsync always 每次有数据修改发生时都会写入AOF文件,appendfsync everysec  每秒钟同步一次，该策略为AOF的缺省策略,appendfsync no  从不同步。高效但是数据不会被持久化
+* aof 文件过大处理: 执行BGREWRITEAOF文件重写操作，重写会创建一个当前 AOF 文件的体积优化版本,优化重写重复命令或者可以合并的命令
+#### rdb
+* 原理: 将Reids在内存中的数据库记录定时dump到磁盘上的RDB持久化
+* 配置: save m n 表示m秒内数据集存在n次修改时，自动触发bgsave。
 ### redis 分布式锁
 
 ```Java
