@@ -1,5 +1,17 @@
 ## 基础
 
+### 基本数据类型
+Java基本类型占用的字节数：
+1字节： byte , boolean
+2字节： short , char
+4字节： int , float
+8字节： long , double
+
+编码与中文：
+Unicode/GBK： 中文2字节
+UTF-8： 中文通常3字节，在拓展B区之后的是4字节
+综上，中文字符在编码中占用的字节数一般是2-4个字节。
+
 ### 面对对象
 
 #### 1. 理解:
@@ -170,7 +182,16 @@ sleep()或者wait(),join()带时间参数等方法时
 
 ![img](file:///C:\Users\sKF8412\AppData\Local\Temp\msohtmlclip1\01\clip_image012.png)
 
-#### 3. 线程同步
+#### 3. 线程方法
+|  sleep()   |  线程睡眠,释放cpu执行权,不释放锁 |
+|  wait()    |   线程等待,释放cpu 执行权,释放锁,只能等待 notify()唤醒|
+|  notify()  | 唤醒被wait 的线程 |
+|  join()  | 当前线程调用其他线程的join方法，会阻塞当前线程，直到其他线程执行完毕，才会进入就绪状态,释放cpu执行权,释放锁|
+|  yield()  | 调用 yield()方法会让当前线程交出CPU资源，让CPU去执行其他的线程。yield()方法只能让 拥有相同优先级的线程 有获取 CPU 执行时间的机会；并不会让线程进入阻塞状态，而是让线程重回就绪状态，它只需要等待重新得到 CPU 的执行；它不释放锁。 |
+
+
+
+#### 4. 线程同步
 
 ##### Synchronized关键字
 
@@ -315,7 +336,7 @@ class LinkBlockThread implements Runnable {
 
 
 
-#### 3. 使用多线程
+#### 4. 使用多线程
 
 方法上加@Async(**"asyncServiceExecutor"**) 里面为线程池名称
 
