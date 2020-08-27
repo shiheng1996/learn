@@ -488,7 +488,9 @@ TreeSet最典型的就是它用到了两种排序方式(内部比较器,外部�
 (2) 被final 修饰的基础类型变量的值不能被修改
 
 (3) 被final 修饰的引用类型变量的引用(内存地址)不能被修改,引用指向的对象是可以修改的
-
+#### final finally finalized 区别
+*  finally 通常和try...catch...finally搭配使用，中无论是否发生异常，都会执行finally里的方法
+*  finalize() 方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。
  
 
 ### transient(被修饰的变量不被序列化)
