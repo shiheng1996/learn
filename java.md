@@ -138,21 +138,12 @@ public class Singleton {
 
 #### 1. 并发编程的三大特性
 
-##### 1. 原子性
 
-**提供互斥访问****,****同一时刻只能有一个线程对数据进行操作**
+|  原子性   | 可见性  |有序性  |
+|  ----  | ----  |----  |
+| 提供互斥访问,同一时刻只能有一个线程对数据进行操作  | 一个线程对主内存的修改，其他线程能够立即看得 |即程序执行的顺序按照代码的先后顺序执行 (happen-before原则)。 |
+| Synchronized、Automic工具类、Lock包工具类| Synchronized、volatile、Lock包工具类 |Synchronized、volatile、Lock包工具类 |
 
-S**ynchronized** **、****automic**
-
-##### 2. 可见性
-
-**一个线程对主内存的修改，其他线程能够立即看得。**
-
-S**ynchronized****、****volatile**
-
-##### 3. 有序性
-
-**即程序执行的顺序按照代码的先后顺序执行 (happen-before原则)。**
 
 #### 2. 线程生命周期
 
