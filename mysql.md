@@ -42,3 +42,12 @@ select quantity from items where id=100 for update;
 insert into orders(id,item_id) values(null,100);
 //step3: 修改商品的库存
 update Items set quantity=quantity-2 where id=100;
+## 乐观锁和悲观锁比较
+|悲观锁|	乐观锁|
+|  ----  | ----  |
+|查询时直接锁住记录使得其它事务不能查询，更不能更新|提交更新时检查版本或者时间戳是否符合|
+|select ... for update|使用 version 或者 timestamp 进行比较|
+|数据库本身|开发者|
+|并发量小|并发量大|
+|类比Java Synchronized关键字|CAS 算法|
+
