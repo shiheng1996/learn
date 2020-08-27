@@ -1,3 +1,13 @@
+# spring aop
+利用动态代理实现
+
+## jdk动态代理
+利用反射机制,只能对实现了InvocationHandler接口的类生成代理
+## cglib动态代理
+利用ASM(开源的java字节码编辑库,操作字节码),将代理对象 类的class文件加载出来,通过修改其字节码生成子类来处理
+用CGlib生成代理类是目标类的子类
+
+
 # spring bean
 ## spring bane的生命周期
 ![](https://www.javazhiyin.com/wp-content/uploads/2019/05/java10-1558500659.jpg)
@@ -58,5 +68,3 @@ protected Object getSingleton(String beanName, boolean allowEarlyReference) {
  ```
 Spring首先从singletonObjects（一级缓存）中尝试获取，如果获取不到并且对象在创建中，则尝试从earlySingletonObjects(二级缓存)中获取，如果还是获取不到并且允许从singletonFactories通过getObject获取，则通过singletonFactory.getObject()(三级缓存)获取。如果获取到了则移除对应的singletonFactory,将singletonObject放入到earlySingletonObjects，其实就是将三级缓存提升到二级缓存中！
 
-#spring ioc
-#spring aop
