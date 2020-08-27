@@ -147,29 +147,12 @@ public class Singleton {
 
 #### 2. 线程生命周期
 
-\1.  NEW
-
-线程还没有调用start的时候
-
-\2.  RUNNABLE
-
-JVM启动了这个任务
-
-\3.  BLOCKED
-
-线程被锁的时候，线程等待进去一个synchronized块方法或者可重入锁的时候
-
-\4.  WAITING
-
-线程调用object.wait() 或thread.join()或 LockSupport.park() 的时候变成 WAITING
-
-\5.  TIMED_WAITING
-
-sleep()或者wait(),join()带时间参数等方法时
-
-\6.  TERMINATED
-
-线程执行完成 或者被中断的时候变成TERMINATED 
+* NEW      线程被创建还没有调用start的时候
+* RUNNABLE JVM启动了这个任务
+* BLOCKED  进入或重新进入synchronized 代码块或方法被阻塞,没有获取到监视器锁
+* WAITING  无限期等待另一个线程执行一个特别的动作.由于Object.wait()、Thread.join()或LockSupport.park() 方法调用,处于的状态,等待被Object.notify()或Object.notifyAll()或LockSupport.unpark()
+* TIMED_WAITING 指定时间地等待另一个线程执行一个特别的动作
+* TERMINATED 执行完成
 
 ![img](file:///C:\Users\sKF8412\AppData\Local\Temp\msohtmlclip1\01\clip_image012.png)
 
