@@ -68,3 +68,15 @@ protected Object getSingleton(String beanName, boolean allowEarlyReference) {
  ```
 Spring首先从singletonObjects（一级缓存）中尝试获取，如果获取不到并且对象在创建中，则尝试从earlySingletonObjects(二级缓存)中获取，如果还是获取不到并且允许从singletonFactories通过getObject获取，则通过singletonFactory.getObject()(三级缓存)获取。如果获取到了则移除对应的singletonFactory,将singletonObject放入到earlySingletonObjects，其实就是将三级缓存提升到二级缓存中！
 
+# SpringBoot
+## 核心注解
+* @SpringBootApplication 用于Spring主类上最最最核心的注解，自动化配置文件，表示这是一个SpringBoot项目，用于开启SpringBoot的各项能力。@SpringBootConfigryation @EnableAutoConfiguration、@ComponentScan三个注解的组合。
+* @EnableAutoConfiguration 允许SpringBoot自动配置注解，开启这个注解之后，SpringBoot就能根据当前类路径下的包或者类来配置Spring Bean。
+* @Configuration Spring 3.0添加的一个注解，用来代替applicationContext.xml配置文件，所有这个配置文件里面能做到的事情都可以通过这个注解所在的类来进行注册。
+* @ComponentScan Spring 3.1添加的一个注解，用来代替配置文件中的component-scan配置，开启组件扫描，自动扫描包路径下的@Component注解进行注册bean实例放到context(容器)中。
+## 跨域
+@CrossOrigin 
+
+# SpringSecurity优缺点
+
+
