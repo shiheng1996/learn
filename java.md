@@ -2,10 +2,10 @@
 
 ### 基本数据类型
 Java基本类型占用的字节数：
-1字节： byte , boolean
-2字节： short , char
-4字节： int , float
-8字节： long , double
+* 1字节： byte , boolean
+* 2字节： short , char
+* 4字节： int , float
+* 8字节： long , double
 
 编码与中文：
 Unicode/GBK： 中文2字节
@@ -456,17 +456,34 @@ TreeSet最典型的就是它用到了两种排序方式(内部比较器,外部�
 
 #### 4. HashMap
 
-底层:数组+链表
+* 底层:数组+链表
 
-扩容机制2倍
+* 扩容机制2倍
 
-加载因子0.75
+* 加载因子0.75
 
-key和value都可以为null
+* key和value都可以为null
 
-线程不安全
+* 线程不安全
 
-put(k,v)原理:通过key的hash值得到数组下标，然后把entry插到该数组，假如有两个不同的key被分到相同的下标，也就是哈希冲突，那么该数组在该下标下就会形成链表
+* put(k,v)原理:通过key的hash值得到数组下标，然后把entry插到该数组，假如有两个不同的key被分到相同的下标，也就是哈希冲突，那么该数组在该下标下就会形成链表
+
+##### hashmap与hashtable与ConcurrentHashMap区别
+|  hashmap   | hashtable  | ConcurrentHashMap|
+|  ----  | ----  |----  |
+|  继承自AbstractMap类 |  继承自Dictionary类| 继承自AbstractMap类,实现了ConcurrentMap接口 |
+| 默认长度16  | 默认长度11 |-|
+| 2倍扩容  | 2倍加1扩容 |段内扩容（段内元素超过该段对应Entry数组长度的75%触发扩容，不会对整个Map进行扩容）
+|  重新计算hash值 | 直接使用对象的hashCode |直接使用对象的hashCode|
+|  线程不安全    | 线程安全,每个方法都有Synchornized修饰 | 线程安全,采用分段锁技术(首先将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问) |
+
+##### hashmap与hashtable相同点
+* 都是hash表实现
+* 数组+链表数据结构
+* 都是通过单链表解决冲突问题
+* 加载因子都为0.75
+
+
 
 #### 5. HashSet
 
@@ -484,9 +501,7 @@ put(k,v)原理:通过key的hash值得到数组下标，然后把entry插到该�
 
 线程安全
 
-#### 9. ConcurrentHashMap
 
-线程安全
 
  
 
