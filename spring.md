@@ -78,6 +78,10 @@ Spring首先从singletonObjects（一级缓存）中尝试获取，如果获取�
 @CrossOrigin 
 
 # SpringSecurity优缺点
+# SpringSecurity执行流程
+![](https://blog.csdn.net/u012702547/article/details/89629415)
+
+
 
 # SpringMVC
 ## 工作流程
