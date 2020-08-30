@@ -1,18 +1,3 @@
-# mysql 优化
-## 设计
-### 存储引擎
-### 字段类型
-### 范式与逆范式
-## 功能
-### 索引
-### 缓存
-### 分区分表
-## 架构
-### 主从复制
-### 读写分离
-### 负载均衡
-
-合理SQL：测试，经验。
 # 存储引擎
 ## innodb与myisam区别
 |  innodb   | myisam  |
@@ -38,6 +23,7 @@
 * 关键字数和子树相同
 * 非叶子节点仅用作索引，它的关键字和子节点有重复元素
 * 叶子节点用指针连在一起
+
 ![](https://img-blog.csdn.net/20180529000659117?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTEyNDA4Nzc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ### hash和BTree的区别
 |  hash   | BTree  |
@@ -60,19 +46,8 @@
 * 全文索引 fulltext索引配合match ... against操作使用,char、varchar，text 列上支持创建全文索引
 ## 索引优化
 
-# 悲观锁
-## 实现形式
-select ... for update
-## 注意
-查询如果触发索引则只会锁行,否则全表扫描的话会锁表
-## 示例
-//step1: 查出商品状态
-select quantity from items where id=100 for update;
-//step2: 根据商品信息生成订单
-insert into orders(id,item_id) values(null,100);
-//step3: 修改商品的库存
-update Items set quantity=quantity-2 where id=100;
-## 乐观锁和悲观锁比较
+
+# 乐观锁和悲观锁比较
 |悲观锁|	乐观锁|
 |  ----  | ----  |
 |查询时直接锁住记录使得其它事务不能查询，更不能更新|提交更新时检查版本或者时间戳是否符合|
