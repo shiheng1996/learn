@@ -190,7 +190,6 @@ public class Singleton {
 ##### Object 类的wait()和notify()
 
 ##### ReentrantLock 重入锁
-
 ```java
 private Lock lock = new ReentrantLock();
 
@@ -210,6 +209,16 @@ private Lock lock = new ReentrantLock();
     }
 ```
 
+##### ReetrantLock 与 Synchronized区别
+ReetrantLock  | Synchronized  | 
+ ---- | ----- | 
+ 都是可重入锁(再次获取锁对象不会造成死锁.)  | 都是可重入锁 |  
+ 支持公平锁与不公平锁,创建时设置,默认false  | 不公平锁 | 
+ 支持响应中断lockInterruptibly()|不支持|
+ 支持限时等待tryLock()|不支持|
+ 锁可以绑定多个Condition,支持指定条件指定线程的await()和signal()|只能使用Object.wait()和notify() notifyAll()|
+ 
+
 
 
 ##### ThreadLocal 线程变量
@@ -223,8 +232,6 @@ Threadlocal为每个线程提供独立的变量副本,而不会影响其他线�
 适用于无状态,副本变量独立后不影响业务逻辑的高并发场景. 例如数据库连接管理、线程会话session管理、
 
 RocketMQUtil工具类使用ThreadLocal存放producer和consumer
-
- 
 
 ```java
 //只改Bank类，其余代码与上同
