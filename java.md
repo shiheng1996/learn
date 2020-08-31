@@ -570,90 +570,11 @@ AOP动态代理
 
 string 内部是用final 修饰的字符数组 ,不可变的是对象, 引用可变
 
-## spring
+## 类加载器
+### 分类
+1、启动类加载器 bootstrap classloader ：加载jre/lib/rt.jar
+2、扩展类加载器 extension classloader ：加载jre/lib/ext/*.jar
+3、应用程序类加载器 application classloader：加载classpath上指定的类库
 
-### AOP实现原理 :动态代理
-
-#### jdk代理
-
-##### 1. 概念
-
-利用反射机制
-
-JDK动态代理只能对实现了接口的类生成代理，而不能针对类
-
-##### 2.  实现
-
-实现InvocationHandler接口
-
-```java
-public class JdkProxy implements InvocationHandler {
-    private Object target;//需要代理的目标对象
-
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        Object result = method.invoke(target, args);
-        return result;
-    }
-
-    //定义获取代理对象方法
-    private Object getJDKProxy(Object targetObject) {
-        //为目标对象target赋值
-        this.target = targetObject;
-        //JDK动态代理只能针对实现了接口的类进行代理，newProxyInstance 函数所需参数就可看出
-        return Proxy.newProxyInstance(targetObject.getClass().getClassLoader(), targetObject.getClass().getInterfaces(), this);
-    }
-
-    public static void main(String[] args) {
-        JdkProxy jdkProxy = new JdkProxy();//实例化JDKProxy对象
-        UserManagerImpl user = (UserManagerImpl) jdkProxy.getJDKProxy(new UserManagerImpl());//获取代理对象
-        user.addUser("admin", "123123");//执行新增方法
-    }
-
-}
-```
-
-
-
-#### cglib动态代理
-
-##### 1. 概念
-
-利用ASM(开源的java字节码编辑库,操作字节码),将代理对象 类的class文件加载出来,通过修改其字节码生成子类来处理
-
- 
-
-用CGlib生成代理类是目标类的子类
-
-##### 2. 实现
-
-实现MethodInterceptor接口
-
-```java
-//Cglib动态代理，实现MethodInterceptor接口
-public class CglibProxy implements MethodInterceptor {
-    private Object target;//需要代理的目标对象
-    //重写拦截方法
-    @Override
-    public Object intercept(Object obj, Method method, Object[] arr, MethodProxy proxy) throws Throwable {
-        Object invoke = method.invoke(target, arr);//方法执行，参数：target 目标对象 arr参数数组
-        return invoke;
-    }
-    //定义获取代理对象方法
-    private Object getCglibProxy(Object objectTarget){
-        //为目标对象target赋值
-        this.target = objectTarget;
-        Enhancer enhancer = new Enhancer();
-        //设置父类,因为Cglib是针对指定的类生成一个子类，所以需要指定父类
-        enhancer.setSuperclass(objectTarget.getClass());
-        enhancer.setCallback(this);// 设置回调
-        return enhancer.create();
-    }
-    public static void main(String[] args) {
-        CglibProxy cglib = new CglibProxy();//实例化CglibProxy对象
-        UserCglibTest cglibProxy = (UserCglibTest)cglib.getCglibProxy(new UserCglibTest());
-        cglibProxy.addUser("asd","123");
-    }
-}
-```
-
+### 双亲委派机制
+双亲委派机制是指当一个类加载器收到一个类加载请求时，该类加载器首先会把请求委派给父类加载器。每个类加载器都是如此，只有在父类加载器在自己的搜索范围内找不到指定类时，子类加载器才会尝试自己去加载。
