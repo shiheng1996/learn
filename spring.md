@@ -6,11 +6,17 @@
 ## cglib动态代理
 利用ASM(开源的java字节码编辑库,操作字节码),将代理对象 类的class文件加载出来,通过修改其字节码生成子类来处理
 用CGlib生成代理类是目标类的子类
-
+## 区别
+|  jdk代理   | cglib代理  |
+|  ----  | ----  |
+| 可以  | 不能对声明为final的方法进行代理 |
+| 只能对实现了接口的类生成代理，而不能针对类  | 可以 |
+|适用频繁、反复地创建代理对象的场景|不需要频繁创建代理对象的应用，如Spring中默认的单例bean，只需要在容器启动时生成一次代理对象|
 
 # spring bean
 ## spring bane的生命周期
-![](https://www.javazhiyin.com/wp-content/uploads/2019/05/java10-1558500659.jpg)
+![](https://img-blog.csdnimg.cn/20200522090616885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjExNjU1OQ==,size_16,color_FFFFFF,t_70)
+1. 
 BeanNameAware.setBeanName() 在创建此bean的bean工厂中设置bean的名称，在普通属性设置之后调用，在InitializinngBean.afterPropertiesSet()方法之前调用
 
 BeanClassLoaderAware.setBeanClassLoader(): 在普通属性设置之后，InitializingBean.afterPropertiesSet()之前调用
